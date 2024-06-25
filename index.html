@@ -1,0 +1,90 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+  <title>Image Tracking AR</title>
+
+  <meta charset="utf-8" />
+  <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+  <meta name="apple-mobile-web-app-capable" content="yes" />
+
+  <!-- iOS has a lot of restrictions on playing videos in the browser. 
+  To play an inline video texture, we must set the meta tag. 
+  A-Frame will inject this if missing.-->
+  
+  
+
+  <!-- import aframe and then ar.js with image tracking / location based features -->
+  <script src="https://aframe.io/releases/1.0.4/aframe.min.js"></script>
+  <script src="https://raw.githack.com/AR-js-org/AR.js/master/aframe/build/aframe-ar-nft.js"></script>
+  <script src="./play-on-click.js"></script>
+
+  
+  <!-- style for the loader -->
+  <style>
+    .arjs-loader {
+      height: 100%;
+      width: 100%;
+      position: absolute;
+      top: 0;
+      left: 0;
+      background-color: rgba(0, 0, 0, 0.8);
+      z-index: 9999;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+    }
+    .arjs-loader div {
+      text-align: center;
+      font-size: 10;
+      color: white;
+    }
+  </style>
+
+
+
+
+</head>
+
+<body style="margin : 0px; overflow: hidden;">
+
+  <!-- minimal loader shown until image descriptors are loaded. 
+    Loading may take a while according to the device computational power -->
+  <div class="arjs-loader">
+    <div>Please Wait loading.....</div>
+  </div>
+  
+
+  <!-- a-frame scene -->
+  <a-scene vr-mode-ui="enabled : false"
+  embedded
+  arjs="trackingMethod:best; sourceType:webcam; debugUIEnabled:false"
+  renderer="logarithmicDepthBuffer : true">
+  <a-assets>
+    <video id="video"
+    src="./assets/videos/Time Lapse Rose Blooming.mp4" 
+    preload="auto"
+    loop="true"
+    playsinline
+    webkit-playsinline
+    autoplay
+    crossorigin="anonymous"></video>
+  </a-assets>
+  <a-entity id="camera" camera position="0 0 8"></a-entity>
+  <a-nft id="nft"
+  type="nft"
+  url="assets/tracker/rose"
+  smooth="true"
+  smoothCount="10"
+  smoothTolerance="0.01"
+  smoothTreshold="5">
+  <a-video id="a-video" src="#video" width="600" height="500" position=" 0 0 -30" rotation="-90 0 0" play-on-click>
+
+</a-video></a-nft>
+   
+
+  </a-scene>
+
+</body>
+
+</html>
